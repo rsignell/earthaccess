@@ -10,11 +10,13 @@ from .api import (
     get_requests_https_session,
     get_s3_credentials,
     get_s3fs_session,
+    get_edl_token,
     granule_query,
     login,
     open,
     search_data,
     search_datasets,
+    in_us_west_2,
 )
 from .auth import Auth
 from .kerchunk import consolidate_metadata
@@ -24,6 +26,7 @@ from .store import Store
 logger = logging.getLogger(__name__)
 
 __all__ = [
+    # api.py
     "login",
     "search_datasets",
     "search_data",
@@ -31,15 +34,21 @@ __all__ = [
     "get_fsspec_https_session",
     "get_s3fs_session",
     "get_s3_credentials",
+    "get_edl_token"
     "granule_query",
     "collection_query",
     "open",
     "download",
+    "auth_environ",
+    "in_us_west_2",
+    # search.py
     "DataGranules",
     "DataCollections",
+    # auth.py
     "Auth",
+    # store.py
     "Store",
-    "auth_environ",
+    # kerchunk
     "consolidate_metadata",
 ]
 
