@@ -62,6 +62,33 @@ class Auth(object):
         self.EDL_GENERATE_TOKENS_URL = "https://urs.earthdata.nasa.gov/api/users/token"
         self.EDL_REVOKE_TOKEN = "https://urs.earthdata.nasa.gov/api/users/revoke_token"
 
+    def __str__(self) -> str:
+        print_str = "Authentication Info\n" + "----------\n"
+        for k, v in self.auth_info:
+            print_str += str("{}: {}\n".format(k, v))
+
+        return print_str
+
+    @property
+    def auth_info(self) -> Dict:
+        """Get information about the authentication session
+
+        Returns:
+            Dict: information about the auth object
+        """
+        summary_dict: Dict[str, Any]
+        summary_dict = {
+            "authenticated?": self.authenticated,
+            "tokens": self.tokens,
+        }
+
+        #modify this to get the region check if in s3
+        # add a separate in uswest2 access point to api?
+        if "Region" in self.s3_bucket():
+            summary_dict["cloud-info"] = self.s3_bucket()
+
+        return summary_dict
+
     def login(self, strategy: str = "netrc", persist: bool = False) -> Any:
         """Authenticate with Earthdata login
 
@@ -154,7 +181,7 @@ class Auth(object):
             daac: the name of a NASA DAAC, i.e. NSIDC or PODAAC
             endpoint: getting the credentials directly from the S3Credentials URL
 
-        Rreturns:
+        Returns:
             A Python dictionary with the temporary AWS S3 credentials
 
         """
