@@ -10,13 +10,11 @@ from .api import (
     get_requests_https_session,
     get_s3_credentials,
     get_s3fs_session,
-    get_edl_token,
-    granule_query,
+    in_us_west_2,
     login,
     open,
     search_data,
     search_datasets,
-    in_us_west_2,
 )
 from .auth import Auth
 from .kerchunk import consolidate_metadata
@@ -34,8 +32,7 @@ __all__ = [
     "get_fsspec_https_session",
     "get_s3fs_session",
     "get_s3_credentials",
-    "get_edl_token"
-    "granule_query",
+    "get_edl_token" "granule_query",
     "collection_query",
     "open",
     "download",
